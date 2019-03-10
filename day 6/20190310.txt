@@ -1,0 +1,55 @@
+아나콘다 - 여러 작업의 기초 - 프레임워크
+아나콘다 기본위치 - 현재 사용자의 내문서
+
+네이버 API 이용한 데이터 분석
+ -->데이터 처리( 반복, 조건 , 제어문)
+
+크롤링의 순서
+1. 인터넷 연결
+2. 데이터 가져와서 분석
+html의 data를 추출할 때
+1) 태그
+2) 클래스
+3) id 
+3가지의 분류 중 하나를 사용해서 긁어온다. or 2개이상 조합해서 추출한다.
+
+beautifulSoup라이브러리 -> 데이터 추출시 사용 : find() ->한개만, findAll() ->여러개 이라는 함수를 사용
+이후 pandas사용해서 데이터프레임에 넣는다.
+
+
+
+정형화된 데이터 - mySQL 사용
+
+mySQL 많은양의 데이터를 정리해서 다루기 위한 프로그램
+mysql , mariadb , oracle
+
+- 학생 데이터(학생 데이터베이스를 따로 만든다) : 학생정보 , 휴학처리 , 군대정보, 취업관련데이터
+	정리 : 학생정보 테이블, 휴학테이블, 취업관련테이블 등등 여러 테이블들로 정리해서다룬다.
+- 학사 관리 데이터(학사 DB)
+- 교직원 데이터(교직원DB)
+sql만의 문법이 있다. -> 다루려면 알아야 한다.
+s
+
+SQL
+데이터베이스 만들 때 : create 
+카페에 나와 있따.
+create database bigdata;
+
+show databases;
+
+use bigdata;
+
+create table member (
+id varchar(10) , 
+pw varchar(10) ,
+name varchar(10),
+tel varchar (10)
+);
+
+insert into member values('100' , '100' , 'park' , '011');
+
+select * from member; ->member 테이블 모두 보여주기
+
+delete from member where id ='100'; -> id 100인거 지우기
+
+select name from member where id = '200';
