@@ -1,0 +1,17 @@
+네이버 API
+없어지고 있는 추세
+https://search.naver.com/search.naver?sm=top_hty&fbm=0&ie=utf8&query=%EC%9E%90%EB%8F%99%EC%B0%A8
+실제 인터넷 주소는 2번째 seach까지 
+https://search.naver.com/search?query=자동차
+이거랑 같다
+주소 :https://developers.naver.com/docs/search/blog/ (블로그 검색어 따오기)
+브라우저(크롬) <---> 네이버
+검색어 : 자동차      code값을 보낸다. code: 200번(if 괜찮으면)  잘 받아들였는지 확인
+					(not found - 404)
+					(internal error - 500)
+카카오 API : Vision 서비스 (음성, 이미지 , 동영상)
+
+
+구글 API
+사이트 유입 분석. (Google analytics )
+ 
