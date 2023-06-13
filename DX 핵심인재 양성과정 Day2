@@ -245,3 +245,65 @@ def multi_int(N):
 
 for j in range (1,20):
     print(multi_int(j))
+
+# 개인 연습 - 크롤링해서 리스트로 만들기
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import numpy as np
+from openpyxl import Workbook
+
+
+def get_news(keyword):
+
+    headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    
+    URL = f'https://search.naver.com/search.naver?where=news&ie=utf8&sm=nws_hty&query={keyword}'
+    data = requests.get(URL,headers=headers)
+
+    soup = BeautifulSoup(data.text, 'html.parser')
+
+    lis = soup.select('#main_pack > section > div > div.group_news > ul > li')
+    list1 = []
+    for li in lis:
+        a = li.select_one('a.news_tit')
+        list1.append([a.text, a['href']])
+        if len(list1) == 5:
+            break
+    return list1
+   
+keywords = ['한국투자증권', '키움증권', '미래에셋증권', '삼성증권', 'KB증권']
+sumlist = []
+for i in keywords:
+    sumlist.extend(get_news(i))
+    
+print(sumlist)
+#dataframe1 = pd.DataFrame(get_news('한국투자증권'))
+#sheet.append(dataframe1)
+#wb.save("샘플파일.xlsx")
+#wb.close()
+
+#데이터베이스 실습
+import pandas as pd
+import numpy as np
+
+data = {'name' : ['영수','철수','영희','소희'], 'age' : [20,15,38,8]}
+
+df = pd.DataFrame(data)
+
+doc = {
+	'name':'세종',
+	'age':14,
+}
+new_df = pd.DataFrame({'name': ['세종'], 'age': [14]})  
+df = pd.concat([df, new_df], ignore_index=True)
+
+
+df['city'] = ['서울','부산','부산','서울','서울']
+
+doc2 = {'name':'한투','age':50,'city' : '서울'}
+new_df2 = pd.DataFrame({'name':'한투','age':50,'city' : '서울'})
+df = pd.concat([df, new_df2], ignore_index=True)
+
+
+print(df)
