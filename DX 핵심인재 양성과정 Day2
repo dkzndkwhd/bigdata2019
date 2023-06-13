@@ -1,0 +1,121 @@
+# 연습
+import pandas as pd
+import numpy as np
+
+data = {'name' : ['a','b','c','d'] , 'age' : [1,2,3,4], 'score' : [12,13,14,15]}
+
+df1 = pd.DataFrame(data)
+
+df1
+
+# 크롤링 연습
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import numpy as np
+
+
+headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+URL = 'https://search.naver.com/search.naver?where=news&ie=utf8&sm=nws_hty&query=삼성전자'
+data = requests.get(URL,headers=headers)
+
+soup = BeautifulSoup(data.text, 'html.parser')
+
+a = soup.select_one('#sp_nws1 > div.news_wrap.api_ani_send > div > a')
+a.text
+
+lis = soup.select('#main_pack > section > div > div.group_news > ul > li')
+
+
+testlist1 = []
+for li in lis:
+    a = li.select_one('a.news_tit')
+    print(a.text, a['href'])
+    testlist1.append([a.text, a['href']])
+    
+dataframe1 = pd.DataFrame(testlist1)
+dataframe1
+
+# 구글 크롤링 연습
+import requests
+from bs4 import BeautifulSoup
+
+# 검색어 입력 받기
+search_term = '금융감독원 보도자료'
+
+# 구글 뉴스 검색 URL
+url = f"https://news.google.com/search?q={search_term}&hl=ko&gl=KR&ceid=KR%3Ako"
+
+
+# HTTP 요청 보내기
+response = requests.get(url)
+
+# BeautifulSoup으로 HTML 파싱
+soup = BeautifulSoup(response.content, 'html.parser')
+
+# 뉴스 기사 링크 가져오기
+articles = soup.select('a.DY5T1d')
+
+for article in articles:
+    news_title = article.text
+    news_link = "https://news.google.com/" + article['href']
+    print(news_title)
+    print(news_link)
+    
+    
+# 크롤링 
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import numpy as np
+from openpyxl import Workbook
+
+wb= Workbook()
+sheet = wb.active
+wb.save("샘플파일.xlsx")
+wb.close()
+wb = openpyxl.load_workbook('샘플파일.xlsx')  # '샘플파일.xlsx' 엑셀 파일을 불러와 wb 변수에 할당
+sheet = wb['Sheet']  # wb 변수에서 'Sheet' 시트를 불러와 sheet 변수에 할당
+print("!")
+def get_news(keyword):
+
+    headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    
+    URL = f'https://search.naver.com/search.naver?where=news&ie=utf8&sm=nws_hty&query={keyword}'
+    data = requests.get(URL,headers=headers)
+
+    soup = BeautifulSoup(data.text, 'html.parser')
+
+    lis = soup.select('#main_pack > section > div > div.group_news > ul > li')
+    list1 = []
+    for li in lis:
+        a = li.select_one('a.news_tit')
+        list1.append([a.text, a['href']])
+        if len(list1) == 5:
+            break
+    return list1
+   
+keywords = ['한국투자증권', '키움증권', '미래에셋증권', '삼성증권', 'KB증권']
+df = pd.Dataframe[]
+
+for i in keywords:
+    dataframe1 = pd.DataFrame(get_news(i))
+    df = pd.concat([df, new_df], ignore_index=True)
+
+dataframe1 = pd.DataFrame(get_news('한국투자증권'))
+sheet.append(dataframe1)
+wb.save("샘플파일.xlsx")
+wb.close()
+
+print(1)
+
+# 엑셀 불러오기 실습
+from openpyxl import Workbook
+
+wb= Workbook()
+sheet = wb.active
+
+sheet['A1'] = '안녕하세요!'
+
+wb.save("샘플파일.xlsx")
+wb.close()
